@@ -138,7 +138,7 @@ const makeStyles = (C) => `
     .app-shell { grid-template-columns: 58px 1fr; }
   }
   @media (max-width: 768px) {
-    .app-shell { grid-template-columns: 1fr; grid-template-rows: 1fr 56px; }
+    .app-shell { grid-template-columns: 1fr; grid-template-rows: 1fr; }
   }
 
   /* ── SIDEBAR ── */
@@ -157,10 +157,7 @@ const makeStyles = (C) => `
   }
   @media (max-width: 768px) {
     .sidebar {
-      border-right: none;
-      border-top: 1px solid ${C.border};
-      flex-direction: row;
-      padding: 0; gap: 0; order: 2;
+      display: none !important;
     }
   }
   .sidebar-logo {
@@ -529,33 +526,6 @@ const makeStyles = (C) => `
   }
   .theme-toggle:hover { border-color:${C.accent}; background:rgba(1,151,246,0.12); color:${C.accent}; }
 
-  /* ── RESPONSIVE NAVIGATION WRAPPERS ── */
-  .desktop-sidebar-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    gap: 0.2rem;
-  }
-  .mobile-bottom-nav-content {
-    display: none;
-  }
-  
-  @media (max-width: 768px) {
-    .desktop-sidebar-content {
-      display: none;
-    }
-    .mobile-bottom-nav-content {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 0.5rem;
-    }
-  }
-
   /* ── MOBILE MENU OVERLAY & SHEET ── */
   .mobile-menu-overlay {
     position: fixed;
@@ -687,6 +657,32 @@ const makeStyles = (C) => `
     color: ${C.textMuted};
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  /* ── MOBILE MENU TRIGGER BUTTON (TOPBAR) ── */
+  .mobile-menu-trigger {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .mobile-menu-trigger {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      font-size: 1.4rem;
+      color: ${C.text};
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid ${C.border};
+      background: ${C.surfaceHigh};
+      transition: all 0.2s;
+      margin-left: 0.4rem;
+    }
+    .mobile-menu-trigger:hover {
+      background: rgba(1,151,246,0.12);
+      border-color: ${C.accent};
+    }
   }
   
   @keyframes fadeIn {
@@ -2904,22 +2900,6 @@ export default function App() {
               {profile?.email?.slice(0, 2).toUpperCase() || "DV"}
             </div>
           </div>
-
-          {/* MOBILE BOTTOM NAV CONTENT */}
-          <div className="mobile-bottom-nav-content">
-            <div className={`nav-item ${page==="dashboard"?"active":""}`} onClick={()=>setPage("dashboard")} title="Dashboard">
-              ⊞
-            </div>
-            <div className={`nav-item ${page==="composer"?"active":""}`} onClick={()=>setPage("composer")} title="Compose">
-              ✦
-            </div>
-            <div className={`nav-item ${page==="scheduled"?"active":""}`} onClick={()=>setPage("scheduled")} title="Posts">
-              ☰
-            </div>
-            <div className={`nav-item ${mobileMenuOpen?"active":""}`} onClick={()=>setMobileMenuOpen(prev => !prev)} title="Menu">
-              <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>⋯</span>
-            </div>
-          </div>
         </aside>
 
         {/* MAIN */}
@@ -2940,6 +2920,15 @@ export default function App() {
               >
                 {profile?.email?.charAt(0).toUpperCase() || "U"}
               </div>
+              
+              {/* MOBILE MENU TRIGGER */}
+              <div
+                className="mobile-menu-trigger"
+                onClick={() => setMobileMenuOpen(prev => !prev)}
+                title="Menu"
+              >
+                ☰
+              </div>
             </div>
           </div>
           <div className="page-content">
@@ -2957,6 +2946,18 @@ export default function App() {
               <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>×</button>
             </div>
             <div className="mobile-menu-grid">
+              <div className={`mobile-menu-item ${page==="dashboard"?"active":""}`} onClick={() => { setPage("dashboard"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">⊞</span>
+                <span className="mobile-menu-label">Dashboard</span>
+              </div>
+              <div className={`mobile-menu-item ${page==="composer"?"active":""}`} onClick={() => { setPage("composer"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">✦</span>
+                <span className="mobile-menu-label">Compose</span>
+              </div>
+              <div className={`mobile-menu-item ${page==="scheduled"?"active":""}`} onClick={() => { setPage("scheduled"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">☰</span>
+                <span className="mobile-menu-label">Posts</span>
+              </div>
               <div className={`mobile-menu-item ${page==="calendar"?"active":""}`} onClick={() => { setPage("calendar"); setMobileMenuOpen(false); }}>
                 <span className="mobile-menu-icon">⊟</span>
                 <span className="mobile-menu-label">Calendar</span>
