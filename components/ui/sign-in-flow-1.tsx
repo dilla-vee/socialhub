@@ -370,7 +370,6 @@ export const SignInPage = ({ className, onLogin }: SignInPageProps) => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col flex-1">
-        <MiniNavbar />
 
         <div className="flex flex-1 flex-col justify-center items-center px-4">
           <div className="w-full mt-[100px] max-w-sm">
