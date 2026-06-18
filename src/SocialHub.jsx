@@ -528,6 +528,176 @@ const makeStyles = (C) => `
     color:${C.text}; font-size:1rem;
   }
   .theme-toggle:hover { border-color:${C.accent}; background:rgba(1,151,246,0.12); color:${C.accent}; }
+
+  /* ── RESPONSIVE NAVIGATION WRAPPERS ── */
+  .desktop-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.2rem;
+  }
+  .mobile-bottom-nav-content {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .desktop-sidebar-content {
+      display: none;
+    }
+    .mobile-bottom-nav-content {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 0.5rem;
+    }
+  }
+
+  /* ── MOBILE MENU OVERLAY & SHEET ── */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .mobile-menu-sheet {
+    background: ${C.surface};
+    border-top: 1px solid ${C.border};
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    padding: 1.5rem;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid ${C.border};
+    padding-bottom: 0.8rem;
+  }
+  
+  .mobile-menu-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: ${C.text};
+  }
+  
+  .mobile-menu-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: ${C.textMuted};
+    cursor: pointer;
+    line-height: 1;
+  }
+  
+  .mobile-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .mobile-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+    background: ${C.cardBg};
+    border: 1px solid ${C.border};
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .mobile-menu-item:hover {
+    border-color: ${C.borderHover};
+    background: rgba(1,151,246,0.08);
+  }
+  
+  .mobile-menu-item.active {
+    background: rgba(1,151,246,0.12);
+    border-color: ${C.accent};
+  }
+  
+  .mobile-menu-icon {
+    font-size: 1.4rem;
+    color: ${C.accentLight};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+  }
+  
+  .mobile-menu-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: ${C.text};
+    text-align: center;
+  }
+  
+  .mobile-menu-logout {
+    border-color: rgba(255, 92, 92, 0.2);
+  }
+  .mobile-menu-logout .mobile-menu-icon {
+    color: #FF5C5C;
+  }
+  .mobile-menu-logout:hover {
+    background: rgba(255, 92, 92, 0.08);
+    border-color: rgba(255, 92, 92, 0.4);
+  }
+  
+  .mobile-menu-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid ${C.border};
+  }
+  
+  .mobile-menu-user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mobile-menu-user-email {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: ${C.text};
+  }
+  
+  .mobile-menu-user-role {
+    font-size: 0.7rem;
+    color: ${C.textMuted};
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
 `;
 
 /* ═══════════════════════════════════════════
@@ -2541,6 +2711,7 @@ const NAV = [
 
 export default function App() {
   const [page, setPage] = useState("dashboard");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [platforms, setPlatforms] = useState(PLATFORMS);
   const [posts, setPosts] = useState(POSTS);
   const [loadingPlatforms, setLoadingPlatforms] = useState(true);
@@ -2701,33 +2872,54 @@ export default function App() {
       <div className="app-shell" style={{ background: C.base }}>
         {/* SIDEBAR */}
         <aside className="sidebar">
-          <div className="sidebar-logo">SH</div>
-          {NAV.map(n => (
-            <div key={n.id} className={`nav-item ${page===n.id?"active":""}`} onClick={()=>setPage(n.id)}>
-              {n.icon}
-              <span className="tooltip">{n.label}</span>
+          {/* DESKTOP SIDEBAR CONTENT */}
+          <div className="desktop-sidebar-content">
+            <div className="sidebar-logo">SH</div>
+            {NAV.map(n => (
+              <div key={n.id} className={`nav-item ${page===n.id?"active":""}`} onClick={()=>setPage(n.id)}>
+                {n.icon}
+                <span className="tooltip">{n.label}</span>
+              </div>
+            ))}
+            <div className="sidebar-spacer" />
+            <div className="nav-item" title="Settings" onClick={() => setPage("profile")}>
+              <span style={{ fontSize:"0.7rem" }}>⚙</span>
+              <span className="tooltip">Settings</span>
             </div>
-          ))}
-          <div className="sidebar-spacer" />
-          <div className="nav-item" title="Settings">
-            <span style={{ fontSize:"0.7rem" }}>⚙</span>
-            <span className="tooltip">Settings</span>
+            {/* Logout button */}
+            <div
+              className="nav-item"
+              title="Sign out"
+              onClick={handleLogout}
+              style={{ color: "#FF5C5C" }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width:18, height:18 }}>
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+              <span className="tooltip">Sign Out</span>
+            </div>
+            <div className="avatar" style={{ width:34, height:34, fontSize:"0.72rem", marginTop:"0.4rem" }}>
+              {profile?.email?.slice(0, 2).toUpperCase() || "DV"}
+            </div>
           </div>
-          {/* Logout button */}
-          <div
-            className="nav-item"
-            title="Sign out"
-            onClick={handleLogout}
-            style={{ color: "#FF5C5C" }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width:18, height:18 }}>
-              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-            <span className="tooltip">Sign Out</span>
+
+          {/* MOBILE BOTTOM NAV CONTENT */}
+          <div className="mobile-bottom-nav-content">
+            <div className={`nav-item ${page==="dashboard"?"active":""}`} onClick={()=>setPage("dashboard")} title="Dashboard">
+              ⊞
+            </div>
+            <div className={`nav-item ${page==="composer"?"active":""}`} onClick={()=>setPage("composer")} title="Compose">
+              ✦
+            </div>
+            <div className={`nav-item ${page==="scheduled"?"active":""}`} onClick={()=>setPage("scheduled")} title="Posts">
+              ☰
+            </div>
+            <div className={`nav-item ${mobileMenuOpen?"active":""}`} onClick={()=>setMobileMenuOpen(prev => !prev)} title="Menu">
+              <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>⋯</span>
+            </div>
           </div>
-          <div className="avatar" style={{ width:34, height:34, fontSize:"0.72rem", marginTop:"0.4rem" }}>DV</div>
         </aside>
 
         {/* MAIN */}
@@ -2755,6 +2947,61 @@ export default function App() {
           </div>
         </main>
       </div>
+
+      {/* MOBILE MENU SHEET */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="mobile-menu-sheet" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-menu-header">
+              <span className="mobile-menu-title">Menu</span>
+              <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>×</button>
+            </div>
+            <div className="mobile-menu-grid">
+              <div className={`mobile-menu-item ${page==="calendar"?"active":""}`} onClick={() => { setPage("calendar"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">⊟</span>
+                <span className="mobile-menu-label">Calendar</span>
+              </div>
+              <div className={`mobile-menu-item ${page==="analytics"?"active":""}`} onClick={() => { setPage("analytics"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">◈</span>
+                <span className="mobile-menu-label">Analytics</span>
+              </div>
+              <div className={`mobile-menu-item ${page==="accounts"?"active":""}`} onClick={() => { setPage("accounts"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">⊕</span>
+                <span className="mobile-menu-label">Accounts</span>
+              </div>
+              <div className={`mobile-menu-item ${page==="profile"?"active":""}`} onClick={() => { setPage("profile"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">☺</span>
+                <span className="mobile-menu-label">Profile</span>
+              </div>
+              <div className="mobile-menu-item" onClick={() => { setPage("profile"); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">⚙</span>
+                <span className="mobile-menu-label">Settings</span>
+              </div>
+              <div className="mobile-menu-item mobile-menu-logout" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>
+                <span className="mobile-menu-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width:18, height:18 }}>
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                </span>
+                <span className="mobile-menu-label">Sign Out</span>
+              </div>
+            </div>
+            
+            {/* User Info section inside menu */}
+            <div className="mobile-menu-footer">
+              <div className="avatar" style={{ cursor: "default" }}>
+                {profile?.email?.slice(0, 2).toUpperCase() || "DV"}
+              </div>
+              <div className="mobile-menu-user-details">
+                <span className="mobile-menu-user-email">{profile?.email || "admin@socialhub.com"}</span>
+                <span className="mobile-menu-user-role">{profile?.role === "admin" ? "Administrator" : "User"}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
