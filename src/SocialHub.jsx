@@ -685,6 +685,71 @@ const makeStyles = (C) => `
     }
   }
   
+  /* ── CALENDAR RESPONSIVENESS ── */
+  .calendar-scroll-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid ${C.border};
+    background: ${C.cardBg};
+  }
+  .calendar-container {
+    min-width: 700px;
+    padding: 1.2rem;
+  }
+  @media (max-width: 768px) {
+    .calendar-scroll-wrapper {
+      margin: 0 -0.25rem;
+      width: calc(100% + 0.5rem);
+    }
+  }
+  
+  .cal-day {
+    padding: 0.5rem;
+    border-radius: 8px;
+    min-height: 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.2s;
+  }
+
+  /* ── ANALYTICS POST STATS CARD ── */
+  .post-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  
+  .post-stat-content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .post-stat-metrics {
+    display: flex;
+    gap: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 600px) {
+    .post-stat-card {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.8rem;
+    }
+    .post-stat-metrics {
+      width: 100%;
+      justify-content: space-around;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 0.6rem;
+    }
+  }
+  
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -2159,44 +2224,46 @@ function Calendar() {
         </div>
       </div>
 
-      <div className="card" style={{ padding:"1.2rem" }}>
-        {/* Weekday headers */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:4, marginBottom:4 }}>
-          {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d => (
-            <div key={d} style={{ textAlign:"center", fontFamily:"Space Mono", fontSize:"0.58rem", color:"#6B8A9E", padding:"0.4rem 0", letterSpacing:"0.08em" }}>{d}</div>
-          ))}
-        </div>
-        {/* Day grid */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:4 }}>
-          {days.map((day, i) => {
-            if (!day) return <div key={i} />;
-            const key = `2025-06-${String(day).padStart(2,"0")}`;
-            const posts = CALENDAR_POSTS[key] || [];
-            const isToday = day === today;
-            return (
-              <div key={i}
-                className="cal-day"
-                style={{
-                  border:`1px solid ${isToday?"rgba(1,151,246,0.6)":"rgba(1,151,246,0.12)"}`,
-                  background: isToday?"rgba(1,151,246,0.12)":"rgba(1,151,246,0.03)",
-                }}
-                onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(1,151,246,0.35)"}
-                onMouseLeave={e=>e.currentTarget.style.borderColor=isToday?"rgba(1,151,246,0.6)":"rgba(1,151,246,0.12)"}>
-                <div style={{ fontFamily:"Syne", fontWeight:700, fontSize:"0.78rem", color: isToday?"#53BFFC":"#E8F4FD", marginBottom:"0.25rem" }}>{day}</div>
-                {posts.map((p,pi) => (
-                  <div key={pi} style={{
-                    fontSize:"0.55rem", fontFamily:"Space Mono",
-                    padding:"0.12rem 0.3rem", borderRadius:3, marginBottom:2,
-                    background: p.status==="scheduled"?"rgba(1,151,246,0.15)":"rgba(107,138,158,0.15)",
-                    color: p.status==="scheduled"?"#53BFFC":"#6B8A9E",
-                    overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
-                  }}>
-                    {p.text}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+      <div className="calendar-scroll-wrapper">
+        <div className="calendar-container">
+          {/* Weekday headers */}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:6, marginBottom:6 }}>
+            {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d => (
+              <div key={d} style={{ textAlign:"center", fontFamily:"Space Mono", fontSize:"0.62rem", color:"#6B8A9E", padding:"0.4rem 0", letterSpacing:"0.08em", fontWeight:700 }}>{d}</div>
+            ))}
+          </div>
+          {/* Day grid */}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:6 }}>
+            {days.map((day, i) => {
+              if (!day) return <div key={i} />;
+              const key = `2025-06-${String(day).padStart(2,"0")}`;
+              const posts = CALENDAR_POSTS[key] || [];
+              const isToday = day === today;
+              return (
+                <div key={i}
+                  className="cal-day"
+                  style={{
+                    border:`1px solid ${isToday?"rgba(1,151,246,0.6)":"rgba(1,151,246,0.12)"}`,
+                    background: isToday?"rgba(1,151,246,0.12)":"rgba(1,151,246,0.03)",
+                  }}
+                  onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(1,151,246,0.35)"}
+                  onMouseLeave={e=>e.currentTarget.style.borderColor=isToday?"rgba(1,151,246,0.6)":"rgba(1,151,246,0.12)"}>
+                  <div style={{ fontFamily:"Syne", fontWeight:700, fontSize:"0.78rem", color: isToday?"#53BFFC":"#E8F4FD", marginBottom:"0.25rem" }}>{day}</div>
+                  {posts.map((p,pi) => (
+                    <div key={pi} style={{
+                      fontSize:"0.55rem", fontFamily:"Space Mono",
+                      padding:"0.12rem 0.3rem", borderRadius:3, marginBottom:2,
+                      background: p.status==="scheduled"?"rgba(1,151,246,0.15)":"rgba(107,138,158,0.15)",
+                      color: p.status==="scheduled"?"#53BFFC":"#6B8A9E",
+                      overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
+                    }}>
+                      {p.text}
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -2316,16 +2383,16 @@ function Analytics({ posts = [] }) {
         <span className="label">Top Performing Posts</span>
         <div style={{ display:"flex", flexDirection:"column", gap:"0.7rem", marginTop:"0.5rem" }}>
           {publishedPosts.sort((a,b)=>b.likes-a.likes).map(p=>(
-            <div key={p.id} style={{ display:"flex", alignItems:"center", gap:"1rem", padding:"0.8rem", background:"rgba(255,255,255,0.03)", borderRadius:10, border:"1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ flex:1 }}>
+            <div key={p.id} className="post-stat-card">
+              <div className="post-stat-content">
                 <div className="flex-row gap-sm" style={{ marginBottom:"0.4rem" }}>
                   {p.platforms.map(pl=><PlatformChip key={pl} id={pl}/>)}
                 </div>
                 <p style={{ fontSize:"0.8rem", color:"#A0A4C0" }}>{p.text.slice(0,80)}…</p>
               </div>
-              <div className="flex-row gap-md" style={{ flexShrink:0 }}>
+              <div className="post-stat-metrics">
                 {[["❤️",p.likes],["💬",p.comments],["📡",p.reach.toLocaleString()]].map(([ic,v])=>(
-                  <div key={ic} style={{ textAlign:"center" }}>
+                  <div key={ic} style={{ textAlign:"center", minWidth: 48 }}>
                     <div style={{ fontFamily:"Syne", fontWeight:700, fontSize:"1rem" }}>{v}</div>
                     <div style={{ fontFamily:"Space Mono", fontSize:"0.55rem", color:"#4A4E6A" }}>{ic}</div>
                   </div>
