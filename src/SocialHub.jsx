@@ -888,7 +888,20 @@ function LoginPage({ onLogin }) {
   );
 }
 
-function Dashboard({ posts = POSTS, platforms = PLATFORMS, onNavigate }) {
+function Dashboard({ posts = POSTS, platforms = PLATFORMS, onNavigate, profile = null }) {
+  // Extract username from email (part before '@')
+  const email = profile?.email || "Dilla";
+  const rawUsername = email.includes("@") ? email.split("@")[0] : email;
+  const username = rawUsername.charAt(0).toUpperCase() + rawUsername.slice(1);
+
+  // Time-conscious greeting
+  const getGreeting = () => {
+    const hrs = new Date().getHours();
+    if (hrs < 12) return "Good morning";
+    if (hrs < 17) return "Good afternoon";
+    return "Good evening";
+  };
+
   const stats = [
     { val:"26.5K", label:"Total Reach", delta:"+12%", up:true },
     { val:"1,051", label:"Engagements", delta:"+8.3%", up:true },
@@ -899,7 +912,7 @@ function Dashboard({ posts = POSTS, platforms = PLATFORMS, onNavigate }) {
     <div className="animate-in">
       <div className="flex-between" style={{ marginBottom:"1.6rem" }}>
         <div>
-          <h2 className="section-heading">Good morning, Dilla 👋</h2>
+          <h2 className="section-heading">{getGreeting()}, {username} 👋</h2>
           <p className="section-sub" style={{ marginBottom:0 }}>Here's what's happening across your networks.</p>
         </div>
         <button className="btn btn-primary" onClick={() => onNavigate("composer")}>+ New Post</button>
@@ -2918,14 +2931,14 @@ export default function App() {
 
   const renderPage = () => {
     switch(page) {
-      case "dashboard": return <Dashboard posts={posts} platforms={platforms} onNavigate={setPage} />;
+      case "dashboard": return <Dashboard posts={posts} platforms={platforms} onNavigate={setPage} profile={profile} />;
       case "composer":  return <Composer platforms={platforms} loading={loadingPlatforms} onPostCreated={loadPosts} onNavigate={setPage} />;
       case "scheduled": return <Scheduled posts={posts} loading={loadingPosts} onDeletePost={handleDeletePost} />;
       case "calendar":  return <Calendar />;
       case "analytics": return <Analytics posts={posts} />;
       case "accounts":  return <Accounts platforms={platforms} setPlatforms={setPlatforms} loading={loadingPlatforms} error={platformsError} setError={setPlatformsError} />;
       case "profile":   return <Profile profile={profile} loading={loadingProfile} error={profileError} />;
-      default:          return <Dashboard posts={posts} platforms={platforms} onNavigate={setPage} />;
+      default:          return <Dashboard posts={posts} platforms={platforms} onNavigate={setPage} profile={profile} />;
     }
   };
 
