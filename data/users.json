@@ -1,0 +1,14 @@
+[
+  {
+    "email": "test.test@example.com",
+    "passwordHash": "$2a$12$GCrCewTSqxY8gtRsXvZmeubjlKlsdfAmRuamo0gwrWtBzPccV2qKW",
+    "role": "user",
+    "createdAt": "2026-06-11T12:11:49.860Z"
+  },
+  {
+    "email": "jonah@gmail.com",
+    "passwordHash": "$2a$12$X/9aiLqFJRa/JWDxSZ/pXu0jvicvTE.MDFIPIoZ8FXdcZRxfwoYhe",
+    "role": "user",
+    "createdAt": "2026-06-11T12:13:23.147Z"
+  }
+]

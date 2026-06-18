@@ -1,0 +1,181 @@
+{
+  "admin": [
+    {
+      "id": 1781098392162,
+      "text": "🌊 From the Kenyan coast to your screen — building digital products that feel as alive as the Indian Ocean at sunrise. Crafting with React, shipping with Node.js. Let's build something remarkable. #WebDev #KenyaBuilds #FullStack",
+      "accounts": [
+        {
+          "platformId": "facebook",
+          "accountId": "fb_1"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_1"
+        },
+        {
+          "platformId": "twitter",
+          "accountId": "tw_1"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-10T13:33:12.162Z"
+    },
+    {
+      "id": 1781012852896,
+      "text": "🌊 From the Kenyan coast to your screen — building digital products that feel as alive as the Indian Ocean at sunrise. Crafting with React, shipping with Node.js. Let's build something remarkable. #WebDev #KenyaBuilds #FullStack",
+      "accounts": [
+        {
+          "platformId": "facebook",
+          "accountId": "fb_1"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_1"
+        },
+        {
+          "platformId": "twitter",
+          "accountId": "tw_1"
+        },
+        {
+          "platformId": "facebook",
+          "accountId": "fb_2"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_2"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-09T13:47:32.896Z"
+    },
+    {
+      "id": 1781012705205,
+      "text": "Standardize test",
+      "accounts": [
+        {
+          "accountId": "tw_1",
+          "platformId": "twitter"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-09T13:45:05.205Z"
+    },
+    {
+      "id": 1781012302430,
+      "text": "Supabase check",
+      "accounts": [
+        {
+          "accountId": "tw_1",
+          "platformId": "twitter"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-09T13:38:22.430Z"
+    },
+    {
+      "id": 1781011961313,
+      "text": "Endpoint test",
+      "accounts": [
+        {
+          "accountId": "tw_1",
+          "platformId": "twitter"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-09T13:32:41.313Z"
+    },
+    {
+      "id": 1781009171723,
+      "text": "Test backend publish",
+      "accounts": [
+        {
+          "accountId": "fb_1",
+          "platformId": "facebook"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-09T12:46:11.723Z"
+    }
+  ],
+  "jonah@gmail.com": [],
+  "admin@socialhub.com": [
+    {
+      "id": 1781181544677,
+      "text": "jnhiji",
+      "accounts": [
+        {
+          "platformId": "facebook",
+          "accountId": "fb_1"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_1"
+        },
+        {
+          "platformId": "twitter",
+          "accountId": "tw_1"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-11T12:39:04.677Z"
+    },
+    {
+      "id": 1781181486492,
+      "text": "generate a caption based on the attached image",
+      "accounts": [
+        {
+          "platformId": "facebook",
+          "accountId": "fb_1"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_1"
+        },
+        {
+          "platformId": "twitter",
+          "accountId": "tw_1"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-11T12:38:06.492Z"
+    },
+    {
+      "id": 1781180125409,
+      "text": "there is alwauys a way",
+      "accounts": [
+        {
+          "platformId": "facebook",
+          "accountId": "fb_1"
+        },
+        {
+          "platformId": "instagram",
+          "accountId": "ig_1"
+        },
+        {
+          "platformId": "twitter",
+          "accountId": "tw_1"
+        }
+      ],
+      "scheduled": false,
+      "schedDate": null,
+      "status": "published",
+      "createdAt": "2026-06-11T12:15:25.409Z"
+    }
+  ]
+}

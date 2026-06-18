@@ -1,0 +1,274 @@
+{
+  "admin": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "color": "#1877F2",
+      "icon": "f",
+      "accounts": [
+        {
+          "id": "fb_1",
+          "handle": "@dillavee.page",
+          "followers": "12.4K",
+          "connected": true,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "fb_2",
+          "handle": "@business.hub",
+          "followers": "8.2K",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "facebook_an8gzz",
+          "handle": "@new_an8gzz",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "facebook_wpq6gv",
+          "handle": "@new_wpq6gv",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "facebook_x1p9l5",
+          "handle": "@new_x1p9l5",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        }
+      ]
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "color": "#E1306C",
+      "icon": "📷",
+      "accounts": [
+        {
+          "id": "ig_1",
+          "handle": "@dilla.vee",
+          "followers": "8.9K",
+          "connected": true,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "ig_2",
+          "handle": "@team.hub",
+          "followers": "4.5K",
+          "connected": true,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_xc1hb6",
+          "handle": "@new_xc1hb6",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_6ltxcn",
+          "handle": "@new_6ltxcn",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_j7he7w",
+          "handle": "@new_j7he7w",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_3kbbid",
+          "handle": "@new_3kbbid",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_g1oyt4",
+          "handle": "@new_g1oyt4",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_fc0l3p",
+          "handle": "@new_fc0l3p",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "instagram_b9gxjr",
+          "handle": "@new_b9gxjr",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        }
+      ]
+    },
+    {
+      "id": "twitter",
+      "label": "X / Twitter",
+      "color": "#1DA1F2",
+      "icon": "𝕏",
+      "accounts": [
+        {
+          "id": "tw_1",
+          "handle": "@dilla_vee",
+          "followers": "5.2K",
+          "connected": true,
+          "apiKey": "tcdHmGXyo346Sx1hQQUJJIXUR",
+          "apiSecret": "b5EZCyyiEokYHiHeytOMrIgXIMDPcZVBevTYQQIw22ye2ajVJb"
+        },
+        {
+          "id": "twitter_puyurn",
+          "handle": "@new_puyurn",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        }
+      ]
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "color": "#0A66C2",
+      "icon": "in",
+      "accounts": [
+        {
+          "id": "li_1",
+          "handle": "Not connected",
+          "followers": "—",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        },
+        {
+          "id": "linkedin_d4o6sj",
+          "handle": "@new_d4o6sj",
+          "followers": "0",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": ""
+        }
+      ]
+    }
+  ],
+  "admin@socialhub.com": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "color": "#1877F2",
+      "icon": "f",
+      "accounts": [
+        {
+          "id": "fb_1",
+          "handle": "@dillavee.page",
+          "followers": "12.4K",
+          "connected": true,
+          "apiKey": "1681755836406989",
+          "apiSecret": "2f88123ea1f503a3c06d192c55a33fdd",
+          "accessToken": "",
+          "accessTokenSecret": ""
+        },
+        {
+          "id": "fb_2",
+          "handle": "@business.hub",
+          "followers": "8.2K",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": "",
+          "accessToken": "",
+          "accessTokenSecret": ""
+        }
+      ]
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "color": "#E1306C",
+      "icon": "📷",
+      "accounts": [
+        {
+          "id": "ig_1",
+          "handle": "@dilla.vee",
+          "followers": "8.9K",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": "",
+          "accessToken": "",
+          "accessTokenSecret": ""
+        },
+        {
+          "id": "ig_2",
+          "handle": "@team.hub",
+          "followers": "4.5K",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": "",
+          "accessToken": "",
+          "accessTokenSecret": ""
+        }
+      ]
+    },
+    {
+      "id": "twitter",
+      "label": "X / Twitter",
+      "color": "#1DA1F2",
+      "icon": "𝕏",
+      "accounts": [
+        {
+          "id": "tw_1",
+          "handle": "@dilla_vee",
+          "followers": "5.2K",
+          "connected": true,
+          "apiKey": "eDFWRWdVc2xJdkswTjVoTnFOSHg6MTpjaQ",
+          "apiSecret": "UiLwGUeq9wNWMVxbO7MT0qyHF_BDykK6qm3dDHnyvuE_Q1B6sw",
+          "accessToken": "1850455607905521664-G4t4uodFcZlaKn6VtwidIQBIc0XlSn",
+          "accessTokenSecret": "zZisFQ1uupsisNkQFBdQaW95ElESZes4RfizN89CA6PxN"
+        }
+      ]
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "color": "#0A66C2",
+      "icon": "in",
+      "accounts": [
+        {
+          "id": "li_1",
+          "handle": "Not connected",
+          "followers": "—",
+          "connected": false,
+          "apiKey": "",
+          "apiSecret": "",
+          "accessToken": "",
+          "accessTokenSecret": ""
+        }
+      ]
+    }
+  ]
+}
